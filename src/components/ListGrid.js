@@ -9,8 +9,7 @@ import React from 'react';
  * @param {style} 需要额外展示的样式
  * @param {excludeList} 需要排除的字段名称
  * @param {clickFunction} 点击事件
- * @param {showButton} 是否展示按钮
- * @param {buttonFunction} 按钮事件
+ * @param {extraDiv} 额外的div
  * @returns 
  */
 const ListGrid = ({ lists, titleName, coverName, extraFields = {}, style, excludeList = [], clickFunction = function () { }, extraDiv }) => {
