@@ -9,10 +9,13 @@ import React from 'react';
  * @param {style} 需要额外展示的样式
  * @param {excludeList} 需要排除的字段名称
  * @param {clickFunction} 点击事件
+ * @param {showButton} 是否展示按钮
+ * @param {buttonFunction} 按钮事件
  * @returns 
  */
-const ListGrid = ({ lists, titleName, coverName, extraFields={}, style, excludeList = [], clickFunction=function() {} }) => {
+const ListGrid = ({ lists, titleName, coverName, extraFields = {}, style, excludeList = [], clickFunction = function () { }, extraDiv }) => {
     const maxLength = 20;
+
     return (
         lists.map(list => (
             <div key={list.id} style={styles.orderContainer} onClick={() => clickFunction(list.id)}>
@@ -23,12 +26,13 @@ const ListGrid = ({ lists, titleName, coverName, extraFields={}, style, excludeL
                             <div key={key} style={{
                                 ...styles.details,
                                 ...(key === titleName && styles.title),
-                                ...( Object.keys(extraFields).includes(key) && styles[extraFields[key]])
+                                ...(Object.keys(extraFields).includes(key) && styles[extraFields[key]])
                             }}>
                                 {list[key] > maxLength ? String(list[key]).slice(0, maxLength) + '...' : list[key]}
                             </div>
                         ))}
                 </div>
+                {extraDiv != null && React.cloneElement(extraDiv, { onClick: () => extraDiv.props.onClick(list.id) })}
             </div>
         ))
     );

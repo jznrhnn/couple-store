@@ -1,10 +1,18 @@
 import React from 'react';
+import { Currency } from './Config';
 
-const ShoppingCartNavbar = () => {
+/**
+ * 购物车导航栏
+ * @param {products} 商品列表
+ * @param {price} 价格
+ * @param {virtualPrice} 虚拟价格
+ * @returns 
+ */
+const ShoppingCartNavbar = ({products,price=0,virtualPrice=0}) => {
   return (
     <div style={styles.navbar}>
       <div style={styles.totalAmount}>
-        Total: $75.99 {/* 虚拟数据 */}
+        Total: {price!==0 && Currency.CASH_SYMBOL+price} {virtualPrice!==0 && Currency.VIRTUAL_SYMBOL+virtualPrice}
       </div>
       <button style={styles.checkoutButton} onClick={() => alert('Checkout button clicked!')}>
         Checkout
