@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import FilterBar from './FilterBar';
-import Title from './Title';
-import { Currency } from './Config';
+import FilterBar from '../FilterBar';
+import Title from '../Title';
+import { Currency } from '../Config';
 
 const TransactionHistory = () => {
     const transactions = [

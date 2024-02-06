@@ -1,9 +1,9 @@
 import React from 'react';
-import logo from '../logo.svg';
-import FilterBar from './FilterBar';
+import logo from '../../logo.svg';
+import FilterBar from '../FilterBar';
 import { useState } from 'react';
-import Title from './Title';
-import ListGrid from './ListGrid';
+import Title from '../Title';
+import ListGrid from '../ListGrid';
 import { useNavigate } from 'react-router-dom';
 
 const Shops = () => {

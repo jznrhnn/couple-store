@@ -1,5 +1,5 @@
 import React from 'react';
-import Wallet from './Wallet';
+import Wallet from '../Wallet';
 
 const UserProfile = () => {
   // 模拟用户信息

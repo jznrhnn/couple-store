@@ -1,10 +1,10 @@
 import React from 'react';
-import FilterBar from './FilterBar';
+import FilterBar from '../FilterBar';
 import { useState } from 'react';
-import Title from './Title';
-import ListGrid from './ListGrid';
-import { Currency, CurrencyMap } from './Config';
-import ShoppingCartNavbar from './ShoppingCartNavbar';
+import Title from '../Title';
+import ListGrid from '../ListGrid';
+import { Currency, CurrencyMap } from '../Config';
+import ShoppingCartNavbar from '../ShoppingCartNavbar';
 import Decimal from 'decimal.js';
 
 const Products = () => {

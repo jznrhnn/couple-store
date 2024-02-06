@@ -3,11 +3,11 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
-import Shops from './components/Shops';
-import UserProfile from './components/UserProfile';
-import Order from './components/Orders';
-import TransactionHistory from './components/TransactionHistory';
-import Products from './components/Products';
+import Shops from './components/pages/Shops';
+import UserProfile from './components/pages/UserProfile';
+import Order from './components/pages/Orders';
+import TransactionHistory from './components/pages/TransactionHistory';
+import Products from './components/pages/Products';
 
 function App() {
   const menu = [
