@@ -4,15 +4,15 @@ import { Currency } from './Config';
 /**
  * 购物车导航栏
  * @param {products} 商品列表
- * @param {price} 价格
- * @param {virtualPrice} 虚拟价格
+ * @param {amount} 价格总价
+ * @param {virtualAmount} 虚拟价格总价
  * @returns 
  */
-const ShoppingCartNavbar = ({products,price=0,virtualPrice=0}) => {
+const ShoppingCartNavbar = ({ products, amount = 0, virtualAmount = 0 }) => {
   return (
     <div style={styles.navbar}>
       <div style={styles.totalAmount}>
-        Total: {price!==0 && Currency.CASH_SYMBOL+price} {virtualPrice!==0 && Currency.VIRTUAL_SYMBOL+virtualPrice}
+        Total: {amount !== 0 && Currency.CASH_SYMBOL + amount} {virtualAmount !== 0 && Currency.VIRTUAL_SYMBOL + virtualAmount}
       </div>
       <button style={styles.checkoutButton} onClick={() => alert('Checkout button clicked!')}>
         Checkout
