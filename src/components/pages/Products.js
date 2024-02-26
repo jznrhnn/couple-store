@@ -1,11 +1,11 @@
-import React from 'react';
-import FilterBar from '../FilterBar';
-import { useState } from 'react';
-import Title from '../Title';
-import ListGrid from '../ListGrid';
+import React, { useState } from 'react';
+import { useCart } from '../CartContext';
 import { Currency, CurrencyMap } from '../Config';
+import FilterBar from '../FilterBar';
+import ListGrid from '../ListGrid';
 import ShoppingCartNavbar from '../ShoppingCartNavbar';
-import Decimal from 'decimal.js';
+import Title from '../Title';
+
 
 const Products = () => {
   // 模拟商品数据
@@ -16,6 +16,7 @@ const Products = () => {
 
     // 添加更多商品数据
   ];
+
   const originProducts = products.map(product => ({ ...product }));
   // 处理商品信息
   products.map(product => {
@@ -40,61 +41,22 @@ const Products = () => {
 
   const extraFields = { 'price': 'green', 'note': 'gray' }
 
-  const [cart, setCart] = useState([]);
-  const [amount, setAmount] = useState(0);
-  const [virtualAmount, setVirtualAmount] = useState(0);
-
-  // 添加购物车
-  const addToCart = (productId, quantity = 1) => {
-    // 计算价格
-    const product = originProducts.find((product) => product.id === productId);
-    //分别计算现金商品和虚拟商品的价格
-    let price = 0;
-    price = new Decimal(product.price).times(quantity);
-    console.log('price:', price);
-    if (product.type === Currency.CASH_INDEX) {
-      setAmount(new Decimal(amount).plus(price));
-    } else if (product.type === Currency.VIRTUAL_INDEX) {
-      setVirtualAmount(new Decimal(virtualAmount).plus(price));
-    }
-    // 检查购物车中是否已经存在该商品
-    const existingItemIndex = cart.findIndex((item) => item.id === productId);
-
-    // 如果存在，则更新数量和价格
-    if (existingItemIndex !== -1) {
-      const updatedCart = [...cart];
-      updatedCart[existingItemIndex].quantity += quantity;
-      updatedCart[existingItemIndex].price = new Decimal(updatedCart[existingItemIndex].price).plus(price);
-      setCart(updatedCart);
-    } else {
-      // 如果不存在，则添加新的商品
-      setCart((prevCart) => [
-        ...prevCart,
-        {
-          image: product.image,
-          id: product.id,
-          name: product.name,
-          productType: product.type,
-          quantity: quantity,
-          price: price,
-          // 可以根据你的数据结构添加其他商品信息
-        },
-      ]);
-    }
-  };
-
   const button = (
-    <button style={styles.addButton} onClick={(productId) => addToCart(productId)}>
+    <button style={styles.addButton} onClick={(productId) =>
+      addToCart(originProducts.find((product) => product.id === productId))
+    }>
       +
-    </button>
+    </button >
   );
+
+  const { amount, virtualAmount, addToCart, cartItems } = useCart();
 
   return (
     <div style={styles.container}>
       <Title title="Products" />
       <FilterBar filterType={filterType} setFilterType={setFilterType} filters={filters} />
       <ListGrid lists={filteredProducts} titleName='name' coverName='image' extraFields={extraFields} styleName='green' extraDiv={button} />
-      <ShoppingCartNavbar list={cart} amount={amount} virtualAmount={virtualAmount} />
+      <ShoppingCartNavbar list={cartItems} amount={amount} virtualAmount={virtualAmount} />
     </div>
   );
 };
