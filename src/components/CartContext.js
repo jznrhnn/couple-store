@@ -37,31 +37,20 @@ const CartProvider = ({ children }) => {
 
   /**
    * 更新购物车商品到指定数量
-   * @param {Array<item>} item 商品信息：包含类型、价格、图片等
-   * @param {number} quantity 需要更新的商品数量
+   * @param {string} itemId 商品 ID
+   * @param {number} quantity 商品数量：默认为 1
    */
-  const updateCartItem = (item, quantity = 1) => {
-    // 检查购物车中是否已经存在该商品
-    const existingItemIndex = cartItems.findIndex((cartItem) => cartItem.id === item.id);
+  const updateCartItem = (itemId, quantity = 1) => {
+   // 找到要更新的商品
+   const existingItemIndex = cartItems.findIndex((cartItem) => cartItem.id === itemId);
     // 如果存在，则更新数量和价格
     if (existingItemIndex !== -1) {
       const updatedCart = [...cartItems];
       updatedCart[existingItemIndex].quantity = quantity;
-      updatedCart[existingItemIndex].price = new Decimal(item.price).times(quantity);
+      updatedCart[existingItemIndex].amount = new Decimal(updatedCart[existingItemIndex].price).times(quantity);
       setCartItems(updatedCart);
     } else {
-      setCartItems((prevCart) => [
-        ...prevCart,
-        {
-          image: item.image,
-          id: item.id,
-          name: item.name,
-          type: item.type,
-          quantity: quantity,
-          price: item.price,
-          amount: new Decimal(item.price).times(quantity),
-        },
-      ]);
+      return;
     }
   }
 

@@ -12,7 +12,7 @@ import React from 'react';
  * @param {extraDiv} 额外的div
  * @returns 
  */
-const ListGrid = ({ lists, titleName, coverName, extraFields = {}, style, excludeList = [], clickFunction = function () { }, extraDiv }) => {
+const ListGrid = ({ lists, titleName, coverName, extraFields = {}, style, excludeList = [], clickFunction = function () { }, extraDiv: Bottons }) => {
     const maxLength = 20;
 
     return (
@@ -31,7 +31,7 @@ const ListGrid = ({ lists, titleName, coverName, extraFields = {}, style, exclud
                             </div>
                         ))}
                 </div>
-                {extraDiv != null && React.cloneElement(extraDiv, { onClick: () => extraDiv.props.onClick(list.id) })}
+                <Bottons productId={list.id} quantity={list.quantity}/>
             </div>
         ))
     );
