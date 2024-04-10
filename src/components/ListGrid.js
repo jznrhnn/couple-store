@@ -1,10 +1,12 @@
 import React from 'react';
+import { useTranslation, Trans } from 'react-i18next';
 
 /**
  * 展示列表
  * @param {lists} {id,name,detail} 
  * @param {titleName} 需要额外展示的标题字段名称
  * @param {coverName} 需要额外展示的图片字段名称
+ * @param {customStyle} 需要额外展示的样式
  * @param {extraField} 需要额外展示的字段名称和样式名称
  * @param {style} 需要额外展示的样式
  * @param {excludeList} 需要排除的字段名称
@@ -12,8 +14,13 @@ import React from 'react';
  * @param {extraDiv} 额外的div
  * @returns 
  */
-const ListGrid = ({ lists, titleName, coverName, extraFields = {}, style, excludeList = [], clickFunction = function () { }, extraDiv: Bottons }) => {
+const ListGrid = ({ lists, titleName, coverName,customStyle, extraFields = {}, style, excludeList = [], 
+    clickFunction = function () { }, extraDiv: Bottons }) => {
     const maxLength = 20;
+
+    const styles = customStyle ? { ...defaultStyles, ...customStyle }: defaultStyles;
+
+    const { t } = useTranslation();
 
     return (
         lists.map(list => (
@@ -27,17 +34,17 @@ const ListGrid = ({ lists, titleName, coverName, extraFields = {}, style, exclud
                                 ...(key === titleName && styles.title),
                                 ...(Object.keys(extraFields).includes(key) && styles[extraFields[key]])
                             }}>
-                                {list[key] > maxLength ? String(list[key]).slice(0, maxLength) + '...' : list[key]}
+                                {t('label.'+key)}:{ String(list[key]).length > maxLength ? String(list[key]).slice(0, maxLength) + '...' : String(list[key])}
                             </div>
                         ))}
                 </div>
-                <Bottons productId={list.id} quantity={list.quantity}/>
+                {Bottons && <Bottons product={list}/>}
             </div>
         ))
     );
 };
 
-const styles = {
+const defaultStyles = {
     orderContainer: {
         display: 'flex',
         alignItems: 'center',
