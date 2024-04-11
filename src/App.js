@@ -9,6 +9,7 @@ import Products from './components/pages/Products';
 import Shops from './components/pages/Shops';
 import TransactionHistory from './components/pages/TransactionHistory';
 import UserProfile from './components/pages/UserProfile';
+import Checkout from './components/pages/CheckOut';
 
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
     { path: 'order', component: <Order /> },
     { path: 'my', component: <UserProfile /> },
     { path: 'transactionHistory', component: <TransactionHistory /> },
-    { path: 'shop', component: <Products /> }
+    { path: 'shop', component: <Products /> },
+    { path: 'checkout', component: <Checkout /> }
   ];
 
   return (
