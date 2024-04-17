@@ -41,8 +41,8 @@ const CartProvider = ({ children }) => {
    * @param {number} quantity 商品数量：默认为 1
    */
   const updateCartItem = (itemId, quantity = 1) => {
-   // 找到要更新的商品
-   const existingItemIndex = cartItems.findIndex((cartItem) => cartItem.id === itemId);
+    // 找到要更新的商品
+    const existingItemIndex = cartItems.findIndex((cartItem) => cartItem.id === itemId);
     // 如果存在，则更新数量和价格
     if (existingItemIndex !== -1) {
       const updatedCart = [...cartItems];
@@ -67,7 +67,7 @@ const CartProvider = ({ children }) => {
     if (existingItemIndex !== -1) {
       const updatedCart = [...cartItems];
       updatedCart[existingItemIndex].quantity += quantity;
-      updatedCart[existingItemIndex].amount = new Decimal(updatedCart[existingItemIndex].price).plus(item.price);
+      updatedCart[existingItemIndex].amount = new Decimal(updatedCart[existingItemIndex].price).times(item.quantity);
       setCartItems(updatedCart);
     } else {
       // 如果不存在，则添加新的商品

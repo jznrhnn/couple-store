@@ -25,10 +25,20 @@ i18n
             note: 'Note',
             monthlySales: 'Monthly Sales',
             type: 'Type',
+            amount: 'Total',
+            sales: 'Sales',
+            rating: 'Rating',
           },
           message: {
             maxQuantity: 'The maximum quantity is ',
             minQuantity: 'The minimum quantity is ',
+          },
+          checkout: {
+            title: 'Checkout',
+            deliveryFee: 'Delivery Fee',
+            discount: 'Discount',
+            amount: 'Total',
+            virtualAmount: 'Virtual Total',
           }
         }
       },
@@ -40,10 +50,20 @@ i18n
             note: '备注',
             monthlySales: '月销量',
             type: '类型',
+            amount: '总计',
+            sales: '销量',
+            rating: '评分',
           },
           message: {
             maxQuantity: '购物车允许最大数量为 ',
             minQuantity: '购物车允许最小数量为 ',
+          },
+          checkout: {
+            title: '结算',
+            deliveryFee: '运费',
+            discount: '折扣',
+            amount: '总计',
+            virtualAmount: '虚拟总计',
           }
         }
       }

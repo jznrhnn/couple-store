@@ -14,11 +14,11 @@ import { useTranslation, Trans } from 'react-i18next';
  * @param {extraDiv} 额外的div
  * @returns 
  */
-const ListGrid = ({ lists, titleName, coverName,customStyle, extraFields = {}, style, excludeList = [], 
+const ListGrid = ({ lists, titleName, coverName, customStyle, extraFields = {}, style, excludeList = [],
     clickFunction = function () { }, extraDiv: Bottons }) => {
     const maxLength = 20;
 
-    const styles = customStyle ? { ...defaultStyles, ...customStyle }: defaultStyles;
+    const styles = customStyle ? { ...defaultStyles, ...customStyle } : defaultStyles;
 
     const { t } = useTranslation();
 
@@ -34,11 +34,11 @@ const ListGrid = ({ lists, titleName, coverName,customStyle, extraFields = {}, s
                                 ...(key === titleName && styles.title),
                                 ...(Object.keys(extraFields).includes(key) && styles[extraFields[key]])
                             }}>
-                                {t('label.'+key)}:{ String(list[key]).length > maxLength ? String(list[key]).slice(0, maxLength) + '...' : String(list[key])}
+                                {t('label.' + key)}:{String(list[key]).length > maxLength ? String(list[key]).slice(0, maxLength) + '...' : String(list[key])}
                             </div>
                         ))}
                 </div>
-                {Bottons && <Bottons product={list}/>}
+                {Bottons && <Bottons product={list} />}
             </div>
         ))
     );

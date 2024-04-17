@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Currency } from './Config';
 import CartPreview from './CartPreview';
+import { useNavigate } from 'react-router-dom';
+import { useCart } from './CartContext';
 
 /**
  * 购物车导航栏
@@ -36,6 +38,19 @@ const ShoppingCartNavbar = ({ products, amount = 0, virtualAmount = 0}) => {
     };
   }, [isExpanded]);
 
+  const navigate = useNavigate();
+  const { cartItems } = useCart();
+  // 跳转结算界面
+  function checkout(shopId) {
+    if(cartItems.length === 0){
+      
+      return;
+    }
+    const searchParams = new URLSearchParams();
+    searchParams.set('shopId', shopId);
+    navigate(`/checkout?${searchParams.toString()}`);
+  };
+
   return (
     <div ref={containerRef} style={styles.container}>
       {isExpanded && <CartPreview products={products} />}
@@ -46,7 +61,7 @@ const ShoppingCartNavbar = ({ products, amount = 0, virtualAmount = 0}) => {
         <span style={styles.viewButton} onClick={toggleExpand}>
           {isExpanded ? '收起购物车⬇ ' : '查看购物车 ⬆'}
         </span>
-        <button style={styles.checkoutButton} onClick={() => alert('Checkout button clicked!')}>
+        <button style={styles.checkoutButton} onClick={() => checkout()}>
           Checkout
         </button>
       </div>
